@@ -1,0 +1,36 @@
+apiVersion: kubevirt.io/v1
+kind: VirtualMachine
+metadata:
+  creationTimestamp: null
+  name: rhel9-simplevm
+spec:
+  dataVolumeTemplates:
+  - metadata:
+      creationTimestamp: null
+      name: root
+    spec:
+      sourceRef:
+        kind: DataSource
+        name: rhel9
+        namespace: openshift-virtualization-os-images
+      storage:
+        resources:
+          requests:
+            storage: 30Gi
+  instancetype:
+    name: u1.medium
+  preference:
+    inferFromVolume: root
+  runStrategy: Always
+  template:
+    metadata:
+      creationTimestamp: null
+    spec:
+      domain:
+        devices: {}
+        resources: {}
+      terminationGracePeriodSeconds: 180
+      volumes:
+      - dataVolume:
+          name: root
+        name: root
