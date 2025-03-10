@@ -19,8 +19,6 @@ spec:
             storage: 30Gi
   instancetype:
     name: u1.medium
-  preference:
-    inferFromVolume: root
   runStrategy: Always
   template:
     metadata:
