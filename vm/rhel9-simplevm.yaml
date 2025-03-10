@@ -27,10 +27,24 @@ spec:
       creationTimestamp: null
     spec:
       domain:
-        devices: {}
         resources: {}
+        devices:
+          disks:
+            - disk:
+                bus: virtio
+              name: root
+            - disk:
+                bus: virtio
+              name: cloudinitdisk        
       terminationGracePeriodSeconds: 180
       volumes:
       - dataVolume:
           name: root
         name: root
+      - cloudInitNoCloud:
+          userData: |-
+            #cloud-config
+            user: cloud-user
+            password: h6ly-51xg-sdc4
+            chpasswd: { expire: False }
+        name: cloudinitdisk
