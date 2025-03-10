@@ -45,6 +45,6 @@ spec:
           userData: |-
             #cloud-config
             user: cloud-user
-            password: h6ly-51xg-sdc4
+            password: cloud-user
             chpasswd: { expire: False }
         name: cloudinitdisk
