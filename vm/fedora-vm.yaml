@@ -20,6 +20,8 @@ spec:
       domain:
         devices:
           rng: {}
+        cpu:
+          cores: 1          
         memory:
           guest: 1024M
       volumes:
