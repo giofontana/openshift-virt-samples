@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: win-2k22-iso
+  namespace: vm-sample
+  annotations:
+    cdi.kubevirt.io/storage.import.endpoint: "http://10.0.1.2:8080/windows/win2k22.iso"
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 20Gi
