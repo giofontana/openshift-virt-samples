@@ -82,4 +82,4 @@ spec:
         - name: sysprep
           sysprep:
             configMap:
-              name: sysprep-win2k22-gold-b164gp
+              name: sysprep-win2k22-golden-image-cm
