@@ -1,0 +1,85 @@
+apiVersion: kubevirt.io/v1
+kind: VirtualMachine
+metadata:
+  name: win2k22-test-2
+  namespace: vm-sample
+spec:
+  dataVolumeTemplates:
+    - metadata:
+        creationTimestamp: null
+        name: win2k22-test-2-rootdisk
+      spec:
+        pvc:
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 100Gi
+        source:
+          blank: {}
+  runStrategy: Always
+  template:
+    metadata:
+      creationTimestamp: null
+    spec:
+      architecture: amd64
+      domain:
+        cpu:
+          cores: 1
+          sockets: 4
+          threads: 1
+        devices:
+          disks:
+            - bootOrder: 1
+              cdrom:
+                bus: sata
+              name: installation-cdrom
+            - bootOrder: 2
+              disk:
+                bus: sata
+              name: win2k22-test-2-rootdisk
+            - bootOrder: 3
+              cdrom:
+                bus: sata
+              name: windows-drivers-disk
+            - cdrom:
+                bus: sata
+              name: sysprep
+          interfaces:
+            - macAddress: ''
+              masquerade: {}
+              model: e1000e
+              name: default
+          networkInterfaceMultiqueue: true
+          rng: {}
+        features:
+          acpi: {}
+          smm:
+            enabled: true
+        firmware:
+          bootloader:
+            efi: {}
+        machine:
+          type: pc-q35-rhel9.4.0
+        memory:
+          guest: 16Gi
+        resources: {}
+      hostname: win2k22-test-2
+      networks:
+        - name: default
+          pod: {}
+      terminationGracePeriodSeconds: 180
+      volumes:
+        - dataVolume:
+            name: win2k22-test-2-rootdisk
+          name: win2k22-test-2-rootdisk
+        - containerDisk:
+            image: 'registry.redhat.io/container-native-virtualization/virtio-win-rhel9@sha256:2bbdc4f62393b3e6dbcd2bc46105d63080db41b57f3c9b51e215518c46c14479'
+          name: windows-drivers-disk
+        - name: installation-cdrom
+          persistentVolumeClaim:
+            claimName: win-2k22-iso
+        - name: sysprep
+          sysprep:
+            configMap:
+              name: sysprep-win2k22-gold-b164gp
