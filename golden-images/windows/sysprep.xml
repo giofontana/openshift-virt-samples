@@ -7,17 +7,28 @@
           <CreatePartitions>
             <CreatePartition wcm:action="add">
               <Order>1</Order>
+              <Size>500</Size>
+              <Type>Primary</Type>
+            </CreatePartition>
+            <CreatePartition wcm:action="add">
+              <Order>2</Order>
               <Extend>true</Extend>
               <Type>Primary</Type>
             </CreatePartition>
           </CreatePartitions>
           <ModifyPartitions>
             <ModifyPartition wcm:action="add">
-              <Active>true</Active>
               <Format>NTFS</Format>
               <Label>System</Label>
-              <Order>1</Order>
               <PartitionID>1</PartitionID>
+              <TypeID>0x27</TypeID>
+              <Order>1</Order>
+            </ModifyPartition>
+            <ModifyPartition wcm:action="add">
+              <Letter>C</Letter>
+              <Order>2</Order>
+              <PartitionID>2</PartitionID>
+              <Format>NTFS</Format>
             </ModifyPartition>
           </ModifyPartitions>
           <DiskID>0</DiskID>
@@ -28,13 +39,13 @@
         <OSImage>
           <InstallFrom>
             <MetaData wcm:action="add">
-              <Key>/IMAGE/NAME</Key>
-              <Value>Windows Server 2022 SERVERSTANDARD</Value>
+              <Key>/IMAGE/INDEX</Key>
+              <Value>2</Value>
             </MetaData>
           </InstallFrom>
           <InstallTo>
             <DiskID>0</DiskID>
-            <PartitionID>1</PartitionID>
+            <PartitionID>2</PartitionID>
           </InstallTo>
         </OSImage>
       </ImageInstall>

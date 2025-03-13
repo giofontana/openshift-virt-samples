@@ -1,0 +1,23 @@
+https://answers.microsoft.com/en-us/windows/forum/all/windows-could-not-format-a-partition-on-disk-0-the/3a60b9af-6bf7-41fd-a0fb-fac8a6ad6389
+
+diskpart
+
+Run this command and hit Enter:
+
+list disk
+(Make note of the disk number you want to convert and enter it into the next command - replace X)
+
+Run this command and hit Enter:
+
+select disk X
+
+Run this command and hit Enter:
+
+clean
+
+Run this command and hit Enter:
+
+convert gpt
+
+
+https://schneegans.de/windows/unattend-generator/
